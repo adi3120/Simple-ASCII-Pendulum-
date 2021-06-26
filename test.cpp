@@ -9,8 +9,8 @@ const int xSize = 100;
 const int ySize = 100;
 
 // These two variables control the position of the pendulum within the window.
-const int offsetx = 25;
-const int offsety = -32;
+const short int offsetx = (short)25;
+const short int offsety = (short)-32;
 
 // This is the gravity and PI constant.
 const float g = 0.01;
@@ -24,7 +24,6 @@ HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
 DWORD dwWritten;
 HWND myconsole = GetConsoleWindow();
 HDC dc = GetDC(myconsole);
-
 
 struct Pendulum
 {
@@ -148,52 +147,52 @@ void clrscr()
 void drawBOB(vector<pair<int, int>> &v, char a)
 {
 
-    FillConsoleOutputCharacterA(hOutput, a, 1, {offsetx + 49 + v[v.size() - 1].first, offsety + 51 + v[v.size() - 1].second}, &dwWritten);
-    FillConsoleOutputCharacterA(hOutput, a, 1, {offsetx + 51 + v[v.size() - 1].first, offsety + 51 + v[v.size() - 1].second}, &dwWritten);
-    FillConsoleOutputCharacterA(hOutput, a, 1, {offsetx + 48 + v[v.size() - 1].first, offsety + 52 + v[v.size() - 1].second}, &dwWritten);
-    FillConsoleOutputCharacterA(hOutput, a, 1, {offsetx + 50 + v[v.size() - 1].first, offsety + 52 + v[v.size() - 1].second}, &dwWritten);
-    FillConsoleOutputCharacterA(hOutput, a, 1, {offsetx + 52 + v[v.size() - 1].first, offsety + 52 + v[v.size() - 1].second}, &dwWritten);
-    FillConsoleOutputCharacterA(hOutput, a, 1, {offsetx + 49 + v[v.size() - 1].first, offsety + 53 + v[v.size() - 1].second}, &dwWritten);
-    FillConsoleOutputCharacterA(hOutput, a, 1, {offsetx + 51 + v[v.size() - 1].first, offsety + 53 + v[v.size() - 1].second}, &dwWritten);
+    FillConsoleOutputCharacterA(hOutput, a, 1, {(short)(offsetx + 49 + v[v.size() - 1].first), (short)(offsety + 51 + v[v.size() - 1].second)}, &dwWritten);
+    FillConsoleOutputCharacterA(hOutput, a, 1, {(short)(offsetx + 51 + v[v.size() - 1].first), (short)(offsety + 51 + v[v.size() - 1].second)}, &dwWritten);
+    FillConsoleOutputCharacterA(hOutput, a, 1, {(short)(offsetx + 48 + v[v.size() - 1].first), (short)(offsety + 52 + v[v.size() - 1].second)}, &dwWritten);
+    FillConsoleOutputCharacterA(hOutput, a, 1, {(short)(offsetx + 50 + v[v.size() - 1].first), (short)(offsety + 52 + v[v.size() - 1].second)}, &dwWritten);
+    FillConsoleOutputCharacterA(hOutput, a, 1, {(short)(offsetx + 52 + v[v.size() - 1].first), (short)(offsety + 52 + v[v.size() - 1].second)}, &dwWritten);
+    FillConsoleOutputCharacterA(hOutput, a, 1, {(short)(offsetx + 49 + v[v.size() - 1].first), (short)(offsety + 53 + v[v.size() - 1].second)}, &dwWritten);
+    FillConsoleOutputCharacterA(hOutput, a, 1, {(short)(offsetx + 51 + v[v.size() - 1].first), (short)(offsety + 53 + v[v.size() - 1].second)}, &dwWritten);
 }
 void drawPendArm(vector<pair<int, int>> &v, char a)
 {
+        for (int i = 0; i < v.size(); i++)
+        {
 
-    for (int i = 0; i < v.size(); i++)
-    {
-
-        FillConsoleOutputCharacterA(hOutput, a, 1, {offsetx + xSize / 2 + v[i].first, ySize / 2 + offsety + v[i].second}, &dwWritten);
-    }
+            FillConsoleOutputCharacterA(hOutput, a, 1, {(short)(offsetx + xSize / 2 + v[i].first), (short)(ySize / 2 + offsety + v[i].second)}, &dwWritten);
+        }
 }
 int main()
 {
-    Pendulum p;
+        Pendulum p;
 
-    while (true)
-    {
-        p.x = p.length * sin(p.angle);
-        p.y = p.length * cos(p.angle);
-        if (p.angle == pi / 2)
+        while (true)
         {
-            p.y = 0;
-        }
-        if (p.angle == 0)
-        {
-            p.x = 0;
-        }
-        float force = (g * sin(p.angle));
-        p.a = (-1 * force);
-        p.v = (p.v + p.a) * DAMPENING;
-        p.angle += p.v;
-        vector<pair<int, int>> v;
+            p.x = p.length * sin(p.angle);
+            p.y = p.length * cos(p.angle);
+            if (p.angle == pi / 2)
+            {
+                p.y = 0;
+            }
+            if (p.angle == 0)
+            {
+                p.x = 0;
+            }
+            float force = (g * sin(p.angle));
+            p.a = (-1 * force);
+            p.v = (p.v + p.a) * DAMPENING;
+            p.angle += p.v;
+            vector<pair<int, int>> v;
 
-        v = giveCoords(0, 0, p.x, p.y);
-        FillConsoleOutputCharacterA(hOutput, char(219), 1, {offsetx + 50, 49 + offsety}, &dwWritten);
-        cout << "\n\n\n\n\n\n                                         Acceleration = " << p.a << endl;
-        cout << "                                         Angle = " << (p.angle * 180) / pi << endl;
+            v = giveCoords(0, 0, p.x, p.y);
+            FillConsoleOutputCharacterA(hOutput, char(219), 1, {(offsetx + 50), (49 + offsety)}, &dwWritten);
+            cout << "\n\n\n\n\n\n                                         Acceleration = " << p.a << endl;
+            cout << "                                         Angle = " << (p.angle * 180) / pi << endl;
 
-        drawPendArm(v, 'o');
-        drawBOB(v, 'x');
-        clrscr();
-    }
+            drawPendArm(v, 'o');
+            drawBOB(v, 'x');
+            clrscr();
+        }
+        return 0;
 }
