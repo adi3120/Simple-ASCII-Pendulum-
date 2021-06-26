@@ -157,7 +157,7 @@ void drawBOB(vector<pair<int, int>> &v, char a)
 }
 void drawPendArm(vector<pair<int, int>> &v, char a)
 {
-        for (int i = 0; i < v.size(); i++)
+        for (unsigned int i = 0; i < v.size(); i++)
         {
 
             FillConsoleOutputCharacterA(hOutput, a, 1, {(short)(offsetx + xSize / 2 + v[i].first), (short)(ySize / 2 + offsety + v[i].second)}, &dwWritten);
