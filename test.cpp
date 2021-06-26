@@ -148,13 +148,13 @@ void clrscr()
 void drawBOB(vector<pair<int, int>> &v, char a)
 {
 
-    FillConsoleOutputCharacterW(hOutput, a, 1, {offsetx + 49 + v[v.size() - 1].first, offsety + 51 + v[v.size() - 1].second}, &dwWritten);
-    FillConsoleOutputCharacterW(hOutput, a, 1, {offsetx + 51 + v[v.size() - 1].first, offsety + 51 + v[v.size() - 1].second}, &dwWritten);
-    FillConsoleOutputCharacterW(hOutput, a, 1, {offsetx + 48 + v[v.size() - 1].first, offsety + 52 + v[v.size() - 1].second}, &dwWritten);
-    FillConsoleOutputCharacterW(hOutput, a, 1, {offsetx + 50 + v[v.size() - 1].first, offsety + 52 + v[v.size() - 1].second}, &dwWritten);
-    FillConsoleOutputCharacterW(hOutput, a, 1, {offsetx + 52 + v[v.size() - 1].first, offsety + 52 + v[v.size() - 1].second}, &dwWritten);
-    FillConsoleOutputCharacterW(hOutput, a, 1, {offsetx + 49 + v[v.size() - 1].first, offsety + 53 + v[v.size() - 1].second}, &dwWritten);
-    FillConsoleOutputCharacterW(hOutput, a, 1, {offsetx + 51 + v[v.size() - 1].first, offsety + 53 + v[v.size() - 1].second}, &dwWritten);
+    FillConsoleOutputCharacterA(hOutput, a, 1, {offsetx + 49 + v[v.size() - 1].first, offsety + 51 + v[v.size() - 1].second}, &dwWritten);
+    FillConsoleOutputCharacterA(hOutput, a, 1, {offsetx + 51 + v[v.size() - 1].first, offsety + 51 + v[v.size() - 1].second}, &dwWritten);
+    FillConsoleOutputCharacterA(hOutput, a, 1, {offsetx + 48 + v[v.size() - 1].first, offsety + 52 + v[v.size() - 1].second}, &dwWritten);
+    FillConsoleOutputCharacterA(hOutput, a, 1, {offsetx + 50 + v[v.size() - 1].first, offsety + 52 + v[v.size() - 1].second}, &dwWritten);
+    FillConsoleOutputCharacterA(hOutput, a, 1, {offsetx + 52 + v[v.size() - 1].first, offsety + 52 + v[v.size() - 1].second}, &dwWritten);
+    FillConsoleOutputCharacterA(hOutput, a, 1, {offsetx + 49 + v[v.size() - 1].first, offsety + 53 + v[v.size() - 1].second}, &dwWritten);
+    FillConsoleOutputCharacterA(hOutput, a, 1, {offsetx + 51 + v[v.size() - 1].first, offsety + 53 + v[v.size() - 1].second}, &dwWritten);
 }
 void drawPendArm(vector<pair<int, int>> &v, char a)
 {
@@ -162,7 +162,7 @@ void drawPendArm(vector<pair<int, int>> &v, char a)
     for (int i = 0; i < v.size(); i++)
     {
 
-        FillConsoleOutputCharacter(hOutput, a, 1, {offsetx + xSize / 2 + v[i].first, ySize / 2 + offsety + v[i].second}, &dwWritten);
+        FillConsoleOutputCharacterA(hOutput, a, 1, {offsetx + xSize / 2 + v[i].first, ySize / 2 + offsety + v[i].second}, &dwWritten);
     }
 }
 int main()
@@ -188,7 +188,7 @@ int main()
         vector<pair<int, int>> v;
 
         v = giveCoords(0, 0, p.x, p.y);
-        FillConsoleOutputCharacter(hOutput, char(219), 1, {offsetx + 50, 49 + offsety}, &dwWritten);
+        FillConsoleOutputCharacterA(hOutput, char(219), 1, {offsetx + 50, 49 + offsety}, &dwWritten);
         cout << "\n\n\n\n\n\n                                         Acceleration = " << p.a << endl;
         cout << "                                         Angle = " << (p.angle * 180) / pi << endl;
 
