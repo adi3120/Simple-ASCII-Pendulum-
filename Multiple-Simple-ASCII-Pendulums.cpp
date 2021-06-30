@@ -199,7 +199,7 @@ int main()
     p6.angle = pi / 1.5;
     p7.angle = pi / 1.43;
 
-    const char x = ' ';
+    const char x = '$';
 
     while (true)
     {
